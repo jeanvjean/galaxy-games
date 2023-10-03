@@ -1,0 +1,15 @@
+FROM node:16.17.1
+
+# Create app directory
+RUN mkdir -p /usr/src/ggames
+WORKDIR /usr/src/ggames
+
+# Install app dependencies
+COPY package.json /usr/src/ggames/
+RUN npm install
+
+# Bundle app source
+COPY . /usr/src/ggames
+
+EXPOSE 3009
+CMD [ "npm", "run", "start:prod" ]

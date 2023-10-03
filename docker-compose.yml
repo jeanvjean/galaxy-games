@@ -1,0 +1,26 @@
+version: '3.9'
+
+services: 
+  mongo_db:
+    container_name: 'database_container'
+    image: mongo:latest
+    restart: always
+    volumes:
+      - mongo_db:/data/db
+
+  # API services
+  api: 
+    build: .
+    ports: 
+      - 3300:3000
+    volumes:
+      - .:usr/src/main
+    environment:
+      PORT: 3300
+      DATABASE_STRING: 'mongodb://database_container:27017/ggame_test'
+      JWT_SECRET: 'jwttokensecret3'
+    depends_on: mongo_db
+
+volumes: 
+  mongo_db: {}
+  
