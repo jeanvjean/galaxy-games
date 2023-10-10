@@ -1,5 +1,3 @@
-version: '3.9'
-
 services: 
   mongo_db:
     container_name: database_container
@@ -13,9 +11,7 @@ services:
     build:
       context: .
     ports: 
-      - 3300:3000
-    volumes:
-      - .:usr/src/main
+      - 3300:3300
     environment:
       PORT: 3300
       DATABASE_STRING: mongodb://database_container:27017/ggame_test
