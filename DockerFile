@@ -1,15 +1,16 @@
-FROM node:16.17.1
+FROM node:alpine
 
 # Create app directory
-RUN mkdir -p /usr/src/ggames
-WORKDIR /usr/src/ggames
+WORKDIR /usr/src/app
 
 # Install app dependencies
-COPY package.json /usr/src/ggames/
+COPY package*.json .
+
 RUN npm install
 
 # Bundle app source
-COPY . /usr/src/ggames
+COPY . .
 
 EXPOSE 3300
-CMD [ "npm", "run", "start:prod" ]
+
+CMD npm start:prod
